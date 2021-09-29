@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 namespace api.Controllers
 {
@@ -12,7 +13,8 @@ namespace api.Controllers
     public record WeatherForecast(string Value) : Weather;
     public record PostWeather(Weather Value);
     public record DictionaryForecast(Dictionary<string, string> Value) : Weather;
-    public record DictionaryGuidForecast(Dictionary<string, string> Value) : Weather;
+    public record DictionaryGuidForecast(Dictionary<Guid, string> Value) : Weather;
+    public record DictionaryGuidObjectForecast(Dictionary<Guid, WeatherForecast> Value) : Weather;
     public record TupleForecast((int, int) Value) : Weather;
     public record EnumForecast(WeatherEnum Value) : Weather;
 
@@ -49,6 +51,7 @@ namespace api.Controllers
             //Post: {"value": { "$type": "WeatherForecast", "value": "test" }}
             //Post: {"value": { "$type": "DictionaryForecast", "value": {"a": "a", "b": "b"} }}
             //Post: {"value": { "$type": "DictionaryGuidForecast", "value": {"3ae89e49-b257-4649-af63-34d906309552": "a", "00525cc4-80e3-4599-803a-071d683ecb46": "b"} }}
+            //Post: {"value": { "$type": "DictionaryGuidObjectForecast", "value": {"3ae89e49-b257-4649-af63-34d906309552": {"value": "test"}, "00525cc4-80e3-4599-803a-071d683ecb46": {"value": "test"}} }}
             //Post: {"value": { "$type": "TupleForecast", "value": [3, 3] }}
             //Post: {"value": { "$type": "EnumForecast", "value": 0 }}
             //Post: {"value": { "$type": "EnumForecast", "value": "Sun" }}
