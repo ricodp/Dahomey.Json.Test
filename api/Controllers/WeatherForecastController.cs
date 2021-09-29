@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 namespace api.Controllers
 {
     public enum WeatherEnum
@@ -29,19 +27,21 @@ namespace api.Controllers
         public Weather Get()
         {
             return new WeatherForecast("Test"); // Returns: { "$type": "WeatherForecast", "value": "Test" }
-    }
+        }
+
         [HttpPost]
         public Weather Post([FromBody] WeatherForecast weather)
         {
             //Post: { "$type": "WeatherForecast", "value": "test" }
             return weather; //Returns: { "$type": "WeatherForecast", "value": "test" }
         }
+
         [HttpPost("/Two")]
         public WeatherForecast Post2([FromBody] Weather weather)
         {
             //Post: { "$type": "WeatherForecast", "value": "test" }
             return (WeatherForecast)weather; //Returns: { "$type": "WeatherForecast", "value": "test" }
-    }
+        }
 
         [HttpPost("/Three")]
         public Weather Post3([FromBody] PostWeather weather)
