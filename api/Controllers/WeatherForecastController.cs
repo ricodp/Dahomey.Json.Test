@@ -17,6 +17,8 @@ namespace api.Controllers
     public record DictionaryGuidObjectForecast(Dictionary<Guid, WeatherForecast> Value) : Weather;
     public record TupleForecast((int, int) Value) : Weather;
     public record EnumForecast(WeatherEnum Value) : Weather;
+    public record DateForecast(DateTimeOffset Value) : Weather;
+
 
     [ApiController]
     [Route("[controller]")]
@@ -55,6 +57,7 @@ namespace api.Controllers
             //Post: {"value": { "$type": "TupleForecast", "value": [3, 3] }}
             //Post: {"value": { "$type": "EnumForecast", "value": 0 }}
             //Post: {"value": { "$type": "EnumForecast", "value": "Sun" }}
+            //Post: {"value": { "$type": "DateForecast", "value": "2020-02-02" }}
             return weather.Value;
         }
 
