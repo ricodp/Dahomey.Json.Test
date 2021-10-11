@@ -33,6 +33,7 @@ namespace api
             objectMap.Register(SetDiscriminator<DictionaryForecast>());
             objectMap.Register(SetDiscriminator<DictionaryGuidForecast>());
             objectMap.Register(SetDiscriminator<DictionaryGuidObjectForecast>());
+            objectMap.Register(SetDiscriminator<DictionaryGuidObjectForecast2>());
             objectMap.Register(SetDiscriminator<TupleForecast>());
             objectMap.Register(SetDiscriminator<EnumForecast>());
             objectMap.Register(SetDiscriminator<DateForecast>());
