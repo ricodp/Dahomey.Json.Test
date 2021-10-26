@@ -11,6 +11,7 @@ namespace api.Controllers
     }
     public abstract record Weather();
     public record WeatherForecast(string Value) : Weather;
+    public record DecimalForecast(decimal Value) : Weather;
     public record PostWeather(Weather Value);
     public record DictionaryForecast(Dictionary<string, string> Value) : Weather;
     public record DictionaryGuidForecast(Dictionary<Guid, string> Value) : Weather;
@@ -60,6 +61,7 @@ namespace api.Controllers
             //Post: {"value": { "$type": "EnumForecast", "value": 0 }}
             //Post: {"value": { "$type": "EnumForecast", "value": "Sun" }}
             //Post: {"value": { "$type": "DateForecast", "value": "2020-02-02" }}
+            //Post: {"value": { "$type": "DecimalForecast", "value": 2 }}
             return weather.Value;
         }
 

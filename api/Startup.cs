@@ -13,6 +13,8 @@ using System.Text.Json.Serialization;
 using api.Controllers;
 using TupleAsJsonArray;
 using Dahomey.Json.Serialization.Converters.Mappings;
+using NodaTime;
+using NodaTime.Serialization.SystemTextJson;
 
 namespace api
 {
@@ -22,6 +24,8 @@ namespace api
         {
             options.Converters.Add(new TupleConverterFactory());
             options.Converters.Add(new JsonStringEnumConverter());
+            options.ConfigureForNodaTime(DateTimeZoneProviders.Tzdb);
+            options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
             options.SetupExtensions();
             options.GetDictionaryKeyConverterRegistry().RegisterDictionaryKeyConverter(new Utf8DictionaryKeyConverter<Guid>());
             var registry = options.GetDiscriminatorConventionRegistry();
@@ -37,6 +41,9 @@ namespace api
             objectMap.Register(SetDiscriminator<TupleForecast>());
             objectMap.Register(SetDiscriminator<EnumForecast>());
             objectMap.Register(SetDiscriminator<DateForecast>());
+            objectMap.Register(SetDiscriminator<DecimalForecast>());
+            objectMap.Register(SetDiscriminator<BoreSample>());
+            objectMap.Register(SetDiscriminator<MonitoringRunMeasurement>());
         }
         
         public Startup(IConfiguration configuration)
